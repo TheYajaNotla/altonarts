@@ -1,0 +1,51 @@
+---
+// Astro handles this logic safely behind the scenes before compiling the page
+const totalSlides = 32;
+const slides = Array.from({ length: totalSlides }, (_, i) => i + 1);
+---
+<section id="catalogue" class="py-32 px-6 md:px-12 max-w-5xl mx-auto">
+    <div class="mb-12 border-b border-neutral-200 pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+            <span class="text-[11px] font-mono tracking-[0.3em] text-[#666666] block mb-2">02 // VISUAL EXHIBITION CATALOGUE</span>
+            <h2 class="text-2xl font-light tracking-widest uppercase">Works & Monograph Plates</h2>
+        </div>
+        <div class="text-xs font-mono text-[#999999] uppercase tracking-wider">
+            <span id="slide-index-counter">Plate 1 of {totalSlides}</span>
+        </div>
+    </div>
+
+    <div class="w-full bg-[#121212] shadow-2xl aspect-[4/3] md:aspect-[16/10] relative flex flex-col justify-between p-4 md:p-8 rounded-sm">
+        <div class="w-full h-full flex items-center justify-center overflow-hidden mb-4">
+            {slides.map((num) => (
+                <div class={`slide-frame ${num === 1 ? 'active flex' : 'hidden'} flex-col justify-center items-center w-full h-full`} data-index={num}>
+                    <img src={`/slides/Slide${num}.jpg`} class="max-h-[60vh] object-contain shadow-2xl" alt={`Portfolio Slide ${num}`} />
+                </div>
+            ))}
+        </div>
+
+        <div class="flex justify-between items-center z-10 w-full bg-black/40 backdrop-blur-sm p-3 rounded-sm">
+            <button id="prev-btn" class="text-white text-xs tracking-widest uppercase font-bold px-5 py-2.5 bg-neutral-900/60 rounded-sm">&larr; Previous</button>
+            <div class="text-[9px] font-mono tracking-widest text-neutral-400 uppercase hidden sm:block">STUDIO CANVAS NAVIGATOR</div>
+            <button id="next-btn" class="text-white text-xs tracking-widest uppercase font-bold px-5 py-2.5 bg-neutral-900/60 rounded-sm">Next &rarr;</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    let currentIdx = 1;
+    const totalSlidesCount = 32;
+
+    const updateSlide = (direction) => {
+        document.querySelector(`.slide-frame[data-index="${currentIdx}"]`).classList.replace('flex', 'hidden');
+        
+        currentIdx += direction;
+        if (currentIdx > totalSlidesCount) currentIdx = 1;
+        if (currentIdx < 1) currentIdx = totalSlidesCount;
+
+        document.querySelector(`.slide-frame[data-index="${currentIdx}"]`).classList.replace('hidden', 'flex');
+        document.getElementById('slide-index-counter').innerText = `Plate ${currentIdx} of ${totalSlidesCount}`;
+    };
+
+    document.getElementById('prev-btn').addEventListener('click', () => updateSlide(-1));
+    document.getElementById('next-btn').addEventListener('click', () => updateSlide(1));
+</script>
