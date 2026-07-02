@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+---
+<Layout title="Alton Ajay Mathew | Contemporary Abstraction">
+	<main class="pt-24">
+		<!-- Hero Presentation Block -->
+		<section class="min-h-[70vh] flex flex-col justify-center items-center text-center px-6 bg-white">
+			<span class="text-[11px] font-bold tracking-[0.4em] text-[#999999] uppercase block mb-6">ARTIST PORTFOLIO</span>
+			<h1 class="text-3xl md:text-5xl font-light tracking-[0.15em] uppercase leading-tight mb-8">
+				An exploration of colour and <span class="font-serif italic">abstracted forms</span>
+			</h1>
+		</section>
+
+		<!-- Artist Statement Text Ingestion -->
+		<section id="statement" class="py-32 px-6 md:px-12 bg-[#0A0A0A] text-white">
+			<div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+				<h2 class="text-xl font-light tracking-widest uppercase text-neutral-200">Artist Statement</h2>
+				<p class="lg:col-span-2 text-neutral-400 text-xs md:text-sm tracking-wide leading-relaxed font-light text-justify">
+					My name is Alton Ajay Mathew (b. 2000) and I am an Indian artist based in Chennai, working within contemporary abstraction. My practice explores the dimensional and affective capacity of colour and form, using the painted surface as a site where colour accumulates, compresses and destabilises.
+				</p>
+			</div>
+		</section>
+
+		<!-- Interactive Gallery Mount Grid -->
+		<Gallery />
+	</main>
+</Layout>
